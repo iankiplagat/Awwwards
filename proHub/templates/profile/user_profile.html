@@ -1,0 +1,78 @@
+{%extends 'base.html'%} {% load static %} {% block content %}
+<header>
+  {% for profile in profile %}
+  <div class="container">
+    <!-- Displaying user profile   -->
+    <div class="profile">
+      <div class="profile-image">
+        {% if profile.profile_pic %}
+        <img
+          class="img-circle profile_img"
+          src="{{ profile.profile_pic.url }}"
+          alt=""
+        />
+        {% else %}
+        <img
+          src="https://assets.awwwards.com/awards/media/cache/thumb_user_retina/default/user5.jpg"
+          alt=""
+          class="img-circle"
+        />
+        {% endif %}
+      </div>
+      <div class="details mt-3">
+        <h5 class="heading-medium">{{ profile.user.username }}</h5> <br>
+      </div>
+      <div class="bio">
+        <p>
+          <span class="name"><strong>Name:</strong> <em>{{ profile.user.profile.name }}</em></span> <br /><span
+            class="bio-text"
+            ><strong>Bio: </strong><em>{{ profile.user.profile.bio }}</em></span
+          >
+        </p>
+      </div>
+      <div class="profile-user-settings">
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="proHubModal"
+          tabindex="-1"
+          aria-labelledby="proHubModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="">
+                  <div class="magna bbtm">
+                    <a class="carta pb-3" href="/profile/{{ user.username }}"
+                      >Profile</a
+                    >
+                  </div>
+                  <div class="magna bbtm">
+                    <a class="carta" href="/accounts/password/change"
+                      >Change Password</a
+                    >
+                  </div>
+                  <div class="magna">
+                    <a class="carta" href="/logout">Logout</a>
+                  </div>
+                </div>
+              </div>
+              <div class="magna margm">
+                <a class="logout carta" href="">Cancel</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of profile section -->
+    <!-- Portfolio section -->
+    <div>
+      <h1>Portfolio</h1>
+    </div>
+  </div>
+  {% endfor %}
+  <!-- End of container -->
+</header>
+{% endblock %}

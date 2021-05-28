@@ -169,3 +169,54 @@ body {
   color: black;
 }
 
+.magna:hover {
+  background-color: rgb(242, 245, 241);
+}
+
+.margm {
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+
+.carta {
+  color: black;
+  text-decoration: none;
+}
+
+.carta:hover {
+  color: black;
+}
+
+.profile {
+  padding-top: 50px;
+  margin-bottom: 50px;
+}
+
+.bio {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-image img {
+  border-radius: 50%;
+}
+
+.profile_img {
+  width: 70px;
+  height: 70px;
+}
+
+.profile-image {
+  display: flex;
+  justify-content: center;
+}
+
+.details {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
+

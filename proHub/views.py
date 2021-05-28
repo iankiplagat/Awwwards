@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import CreateProfileForm
 from django.http import HttpResponseRedirect,Http404
 from .email import send_welcome_email
+from .models import Profile
 
 # Create your views here.
 @login_required
@@ -31,3 +32,14 @@ def create_profile(request):
   else:
     form = CreateProfileForm()
   return render(request,'profile/create_profile.html',{"form":form})
+
+# Profile page
+@login_required
+def user_profile(request, username):
+    '''
+    Method to display a specific user profile
+    '''
+    # images = Image.get_image_by_user(username)
+    profile = Profile.get_user(username)
+    
+    return render(request, 'profile/user_profile.html', {"profile": profile })
