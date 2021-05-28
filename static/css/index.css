@@ -1,11 +1,20 @@
 body {
-  font-family: "Lato", sans-serif;
   transition: background-color 0.5s;
+}
+
+#header-top {
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  border-bottom: 1px solid #E6EAEA;
+  width: 100%;
 }
 
 .slogan {
   font-size: 16px;
   font-weight: 400;
+  padding-top: 25px;
 }
 
 .box-center {
@@ -16,12 +25,13 @@ body {
 
 .sidenav {
   height: 100%;
+  line-height: 50px;
   width: 0;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: #f4f7f6;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -30,14 +40,20 @@ body {
 .sidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
-  font-size: 25px;
-  color: #818181;
+  color: black;
   display: block;
   transition: 0.3s;
+  border-bottom: black;
+  position: relative;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #f4f7f6;
+  border-bottom: 1px solid #e6eaea;
 }
 
 .sidenav a:hover {
-  color: #f1f1f1;
+  background-color: #fff;
 }
 
 .sidenav .closebtn {
@@ -48,19 +64,76 @@ body {
   margin-left: 50px;
 }
 
+.closebtn {
+  padding-right: 30px;
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.closebtn:hover {
+  color: gray;
+}
+
 #main {
   transition: margin-left 0.5s;
-  padding: 16px;
-  line-height: 73px;
   font-size: 13px;
   font-weight: 400;
+}
+
+#header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    height: 70px;
+    line-height: 73px;
+    font-size: 13px;
+    font-weight: 400;
+    z-index: 302;
+    transition: background 0.3s;
+}
+
+#header-top .box-right {
+  text-align: right;
+}
+
+#header-top .box-left, #header-top .box-right {
+  width: 15%;
+}
+
+.socials a {
+  cursor: pointer;
+  color: black;
+  font-size: 20px;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 10px;
+  line-height: 50px;
+}
+
+.socials a:hover {
+  opacity: 0.7;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .menu {
   line-height: 73px;
   font-size: 13px;
   font-weight: 400;
-  cursor:pointer
+  cursor: pointer;
+  padding: 16px;
+  border-right: 1px solid #E6EAEA;
+}
+
+.menu:hover {
+  color: gray;
+}
+
+.links {
+  display: flex;
+  height: 70px;
+  border-bottom: 1px solid #e6eaea;
 }
 
 @media screen and (max-height: 450px) {
@@ -71,3 +144,28 @@ body {
     font-size: 13px;
   }
 }
+
+/* .register {
+  right: 10px;
+  position: fixed;
+}
+
+@media screen and (max-width: 700px) {
+  .register {
+    position: relative;
+  }
+} */
+
+.navbar-brand {
+  color: black;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -90px;
+  font-weight: bold;
+  background: transparent;
+}
+
+.navbar-brand:hover {
+  color: black;
+}
+
