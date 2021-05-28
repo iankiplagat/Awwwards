@@ -6,14 +6,19 @@
     onclick="closeNav()"
     >CLOSE <i class="fas fa-times"></i
   ></a>
+  {% if user.is_authenticated %}
   <a href="/profile/{{ user.username }}">Profile</a>
+  {% endif %}
   <a href="/accounts/login">Register/Login</a>
-  <a href="">Home</a>
+  <a href="{% url 'home' %}">Home</a>
+  <a href="">Submit Your Site!</a>
   <a href="#">About</a>
   <a href="#">Services</a>
   <a href="#">Clients</a>
   <a href="#">Contact</a>
+  {% if user.is_authenticated %}
   <a href="/logout">Logout</a>
+  {% endif %}
 </div>
 
 <div id="">
@@ -48,12 +53,12 @@
   </div>
 
   <!-- Navigation bar -->
-  <div class="" id="header">
-    <span class="menu" onclick="openNav()">&#9776; MENU</span>
-  </div>
   <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#"
+    <div class="container-fluid" style="padding: 0;">
+      <div class="" id="header">
+        <span class="menu" onclick="openNav()">&#9776; MENU</span>
+      </div>
+      <a class="logo" href="{% url 'home' %}"
         ><svg width="141" height="22.3" viewBox="0 0 280 44.3">
           <path
             class="logo-fill"
@@ -102,6 +107,79 @@
           ></path>
         </svg>
       </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      {% if user.is_authenticated %}
+      <div class="prof collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          {% for profile in profile %}
+          <li class="nav-item drop dropdown">
+            <a
+              class="nav-link dropdown-toggle pinfo"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {% if profile.profile_pic %}
+              <img
+                class="img-circle"
+                src="{{ profile.profile_pic.url }}"
+                alt=""
+                width="40px"
+                height="40px"
+              />
+              {% else %}
+              <img
+                src="https://assets.awwwards.com/awards/media/cache/thumb_user_retina/default/user5.jpg"
+                alt=""
+                class="img-circle"
+                width="40px"
+                height="40px"
+              />
+              {% endif %}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a
+                  class="dropdown-item carta pb-3"
+                  href="/profile/{{ user.username }}"
+                  >Profile</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item carta pb-3"
+                  href="/accounts/password_change"
+                  >Change Password</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item carta pb-3" href="/logout">Logout</a>
+              </li>
+            </ul>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% else %}
+      <div class="regi">
+        <a class="carta nav-item reg" href="/accounts/register/">REGISTER</a>
+      </div>
+      <div class="site">
+        <a class="carta nav-item reg" style="background-color: #49C5B6;" href="">SUBMIT YOUR SITE!</a>
+      </div>
+      {% endif %}
     </div>
   </nav>
 </div>

@@ -6,7 +6,6 @@ from .email import send_welcome_email
 from .models import Profile
 
 # Create your views here.
-@login_required
 def homepage(request):
   
   return render(request, 'home.html')
