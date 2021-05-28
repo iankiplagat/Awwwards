@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-import os
 from pathlib import Path
+import os
+import cloudinary
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,6 +35,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'proHub.apps.ProhubConfig',
     'bootstrap5',
+    'cloudinary',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+cloudinary.config(
+    cloud_name="kasparov",
+    api_key="623993469388411",
+    api_secret="VCf65PVv1BM09CJbTXCjj2pprRc",
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
