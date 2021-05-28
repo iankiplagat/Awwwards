@@ -2,12 +2,21 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import CreateProfileForm
 from django.http import HttpResponseRedirect,Http404
+from .email import send_welcome_email
 
 # Create your views here.
 @login_required
 def homepage(request):
   
   return render(request, 'home.html')
+
+@login_required
+def welcome_mail(request):
+  user=request.user
+  email=user.email
+  name=user.username
+  send_welcome_email(name,email)
+  return redirect(create_profile)
 
 @login_required
 def create_profile(request):

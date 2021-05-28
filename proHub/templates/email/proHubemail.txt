@@ -1,0 +1,12 @@
+From the Management,
+
+Hello {{name}}, welcome to Awwards.
+
+Meet other digital design professionals from across the globe, 
+find inspiration, impart knowledge and experience, 
+connect, 
+and share constructive, respectful critiques. 
+
+Best,
+Ian Kiplagat
+Founder, and CEO
