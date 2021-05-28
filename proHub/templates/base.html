@@ -24,8 +24,11 @@
     <title>Awwwards</title>
     <!-- <link class="" rel="shortcut icon" href="static/photos/icon.png"> -->
   </head>
-  <body>
-    {% include "navbar.html" %} {% block content %} {% endblock %} {% include "footer.html" %} 
+  <body id="main">
+    {% include "navbar.html" %} 
+    {% block content %} 
+    {% endblock %} 
+    {% include "footer.html" %} 
     {% block script %}
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
@@ -37,6 +40,20 @@
       integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
       crossorigin="anonymous"
     ></script>
+    <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+      }
+      
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+        document.getElementById("body").style.marginLeft= "0";
+        document.body.style.backgroundColor = "white";
+      }
+      </script>
     {% endblock %}
   </body>
 </html>
