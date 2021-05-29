@@ -8,7 +8,7 @@ from .forms import NewSiteForm
 import datetime as dt
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializer import ProfileSerializer
+from .serializer import ProfileSerializer, ProjectsSerializer
 from rest_framework import status
 
 # Create your views here.
@@ -96,3 +96,17 @@ class ProfileList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)  
+      
+      
+class ProjectsList(APIView):
+    def get(self, request, format=None):
+        projects = Projects.objects.all()
+        serializers = ProjectsSerializer(projects, many=True)
+        return Response(serializers.data)      
+      
+    def post(self, request, format=None):
+        serializers = ProjectsSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)   
