@@ -389,3 +389,91 @@ a:hover {
 .bts .bt-connect {
   margin-right: 20px;
 }
+.landing {
+  height: 550px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: gray;
+}
+
+.landing-img {
+  width: 100%;
+}
+
+#landing-overlay {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+}
+
+
+.site-title {
+  font-family: 'Limelight', cursive;
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  border: 3px solid;
+  border-radius: 50%;
+}
+
+.border-red {
+  border-color: rgb(228, 25, 25);
+}
+
+.int {
+  font-size: 36px;
+}
+
+.dec {
+  font-size: 16px;
+}
+
+button.md-icon {
+  overflow: hidden;
+}
+
+.card-bg {
+  background-color: rgba(7, 7, 7, 0.4)
+}
+
+.site-img {
+  max-height: 230px;
+  overflow: hidden;
+  position: relative;
+}
+
+
+.site-fade-out {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  animation: sitefadeout 500ms forwards;
+}
+
+.site-fade-in {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  animation: sitefadein 500ms forwards;
+}
+
+.img-hoverin {
+  animation: imgzoomin 500ms forwards;
+  width: 100%;
+}
+
+.img-hoverout {
+  animation: imgzoomout 500ms forwards;
+}
+
+
+
+
