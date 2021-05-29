@@ -73,3 +73,34 @@ class Projects(models.Model):
 
 class Meta:
   ordering=['-pub_date']
+  
+  
+  
+class Rating(models.Model):
+    user = models.ForeignKey(User, related_name='ratings', on_delete=models.CASCADE, null=True)
+    reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    projects = models.ForeignKey(Projects, related_name='ratings', on_delete=models.CASCADE, null=True)
+    post_date = models.DateTimeField(auto_now_add=True, null=True)
+    usability = models.FloatField(default=0.00, null=True)
+    design = models.FloatField(default=0.00, null=True)
+    creativity = models.FloatField(default=0.00, null=True)
+    content = models.FloatField(default=0.00, null=True)
+    mobile = models.FloatField(default=0.00, null=True)
+    usability_average=models.FloatField(default=0.00, null=True)
+    design_average=models.FloatField(default=0.00, null=True)  
+    creativity_average=models.FloatField(default=0.00, null=True)  
+    content_average=models.FloatField(default=0.00, null=True)  
+    mobile_average=models.FloatField(default=0.00, null=True) 
+    
+    def __str__(self):
+        return self.projects
+      
+    class Meta:
+        ordering=['-post_date']  
+
+    def save_rating(self):
+        self.save()
+  
+    def delete_rating(self):
+        self.delete()
+ 

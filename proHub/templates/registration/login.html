@@ -17,14 +17,13 @@
           <form action="/accounts/login/" method="post">
             {% csrf_token %} {% bootstrap_form form%}
 
-            <button
-              align="center"
-              type="submit"
-              class="button gry form-group text-center d-grid mt-5 mb-3"
-              style="width: 100%"
-            >
-              <span class="bt-content text-uppercase">Login now</span>
-            </button>
+            <div class="form-group text-center d-grid gap-2">
+              <input
+                type="submit"
+                class="button gry form-group text-center d-grid mt-5 mb-3"
+                value="LOGIN NOW"
+              />
+            </div>
 
             <input type="hidden" name="next" value="{% url 'home' %}" />
           </form>

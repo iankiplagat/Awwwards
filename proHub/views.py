@@ -86,6 +86,7 @@ def search(request):
 
 
 class ProfileList(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
     def get(self, request, format=None):
         profiles = Profile.objects.all()
         serializers = ProfileSerializer(profiles, many=True)
@@ -98,9 +99,23 @@ class ProfileList(APIView):
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)  
     
+    
+class ProfileDescription(APIView):
     permission_classes = (IsAdminOrReadOnly,)
+    def get_profile(self, pk):
+        try:
+            return Profile.objects.get(pk=pk)
+        except Profile.DoesNotExist:
+            return Http404
+
+    def get(self, request, pk, format=None):
+        profile = self.get_profile(pk)
+        serializers = ProfileSerializer(profile)
+        return Response(serializers.data)    
+      
       
 class ProjectsList(APIView):
+    permission_classes = (IsAdminOrReadOnly,)  
     def get(self, request, format=None):
         projects = Projects.objects.all()
         serializers = ProjectsSerializer(projects, many=True)
@@ -113,4 +128,3 @@ class ProjectsList(APIView):
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST) 
     
-    permission_classes = (IsAdminOrReadOnly,)  
