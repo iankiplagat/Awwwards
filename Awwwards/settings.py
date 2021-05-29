@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'cloudinary',
     'rest_framework',
+    'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,6 +58,12 @@ cloudinary.config(
     api_key="623993469388411",
     api_secret="VCf65PVv1BM09CJbTXCjj2pprRc",
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
