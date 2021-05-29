@@ -2,6 +2,11 @@ body {
   transition: background-color 0.5s;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+
 .navbar {
   padding-top: 0;
   padding-bottom: 0;
@@ -473,6 +478,12 @@ button.md-icon {
 .img-hoverout {
   animation: imgzoomout 500ms forwards;
 }
+
+.portfolio {
+  display: flex;
+  flex-direction: row;
+}
+
 
 
 
