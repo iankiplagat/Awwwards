@@ -1,0 +1,56 @@
+{% load bootstrap5 %} {% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Submit Site</title>
+  {{form.media}}
+
+{% block styles %} {% bootstrap_css %}
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+  crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="{% static 'css/index.css' %}"> {% endblock %}
+
+</head>
+
+<body style="background-color: rgb(250,250,250);">
+  {% include 'navbar.html' %}
+
+  <div class="container pt-5 pb-5">
+    <div class="row">
+      <div class="col-md-4"></div>
+    <div class="posting card col-md-4" style="color: white;">
+      <form class="pt-3 pb-3 new_post" action="{%url 'new_site'%}" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+    
+        {% bootstrap_form form%}
+        <div class="form-group text-center d-grid gap-2">
+          <input 
+          type="submit" 
+          class="button gry form-group text-center d-grid mt-5 mb-3"
+          style="width: 100%"
+          value="Post"
+        >
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4"></div>
+    </div>
+  </div>
+
+  {% include 'footer.html' %}
+
+   {% block scripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  {% bootstrap_javascript %} {% endblock %}
+
+</body>
+
+</html>

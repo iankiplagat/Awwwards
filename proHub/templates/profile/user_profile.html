@@ -20,12 +20,16 @@
         {% endif %}
       </div>
       <div class="details mt-3">
-        <h5 class="heading-medium">{{ profile.user.username }}</h5> <br>
+        <h5 class="heading-medium">{{ profile.user.username }}</h5>
+        <br />
       </div>
       <div class="bio">
         <p>
-          <span class="name"><strong>Name:</strong> <em>{{ profile.user.profile.name }}</em></span> <br /><span
-            class="bio-text"
+          <span class="name"
+            ><strong>Name:</strong>
+            <em>{{ profile.user.profile.name }}</em></span
+          >
+          <br /><span class="bio-text"
             ><strong>Bio: </strong><em>{{ profile.user.profile.bio }}</em></span
           >
         </p>
@@ -68,11 +72,49 @@
     </div>
     <!-- End of profile section -->
     <!-- Portfolio section -->
-    <div>
-      <h1>Portfolio</h1>
-    </div>
   </div>
   {% endfor %}
   <!-- End of container -->
 </header>
+<main>
+  <div class="container">
+    <div class="row pt-5 timeline mleft btp">
+      {% for project in projects %}
+      <div class="gallery-item col-md-4" tabindex="0">
+        <div class="ratio ratio-1x1" style="overflow: hidden">
+          <img
+            src="{{project.project_image.url}}"
+            class="explore-img gallery-image"
+            alt=""
+          />
+
+          <div class="gallery-item-info">
+            <ul>
+              <li class="gallery-item-likes">
+                <span class="visually-hidden">Likes:</span
+                ><i class="fas fa-heart" aria-hidden="true"></i>
+              </li>
+              <li class="gallery-item-comments">
+                <span class="visually-hidden">Comments:</span
+                ><i class="fas fa-comment" aria-hidden="true"></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="row">
+      <div class="column">
+        <img src="/w3images/wedding.jpg" style="width:100%">
+  <img src="/w3images/rocks.jpg" style="width:100%">
+  <img src="/w3images/falls2.jpg" style="width:100%">
+  <img src="/w3images/paris.jpg" style="width:100%">
+  <img src="/w3images/nature.jpg" style="width:100%">
+  <img src="/w3images/mist.jpg" style="width:100%">
+  <img src="/w3images/paris.jpg" style="width:100%">
+      </div>
+    </div>
+  </div>
+</main>
 {% endblock %}

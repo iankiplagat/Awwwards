@@ -3,12 +3,16 @@ from django.contrib.auth.decorators import login_required
 from .forms import CreateProfileForm
 from django.http import HttpResponseRedirect,Http404
 from .email import send_welcome_email
-from .models import Profile
+from .models import Profile, Projects
+from .forms import NewSiteForm
+import datetime as dt
 
 # Create your views here.
 def homepage(request):
+  date=dt.date.today()
+  projects=Projects.get_all_projects()
   
-  return render(request, 'home.html')
+  return render(request, 'home.html', {"date":date, "projects":projects})
 
 @login_required
 def welcome_mail(request):
@@ -40,5 +44,21 @@ def user_profile(request, username):
     '''
     # images = Image.get_image_by_user(username)
     profile = Profile.get_user(username)
+    projects = Projects.user_projects(username)
     
-    return render(request, 'profile/user_profile.html', {"profile": profile })
+    return render(request, 'profile/user_profile.html', {"profile": profile, "projects":projects })
+  
+@login_required
+def new_site(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewSiteForm(request.POST, request.FILES)
+        if form.is_valid():
+            site = form.save(commit=False)
+            site.user = current_user
+            site.save()
+        return redirect('home')
+
+    else:
+        form = NewSiteForm()
+    return render(request, 'project/submit_site.html', {"form": form})

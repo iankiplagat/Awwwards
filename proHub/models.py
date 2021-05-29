@@ -38,7 +38,7 @@ class Projects(models.Model):
   project_image = CloudinaryField('project_images')
   urls = models.URLField()
   pub_date = models.DateTimeField(auto_now_add=True)
-  profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+  profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
   user = models.ForeignKey(User, related_name="posted_by", on_delete=models.CASCADE, null=True)
   voters = models.IntegerField(default=0)
 
@@ -68,8 +68,8 @@ class Projects(models.Model):
     return cls.objects.filter(name__icontains=name)
 
   @classmethod
-  def user_projects(cls,profile):
-    return cls.objects.filter(profile=profile)  
+  def user_projects(cls,username):
+    return cls.objects.filter(user__username__contains=username)  
 
 class Meta:
   ordering=['-pub_date']
