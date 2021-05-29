@@ -62,3 +62,18 @@ def new_site(request):
     else:
         form = NewSiteForm()
     return render(request, 'project/submit_site.html', {"form": form})
+
+@login_required  
+def search(request):
+
+    if 'search' in request.GET and request.GET["search"]:
+        name = request.GET.get("search")
+        searched_projects = Projects.search_project(name)
+        print(searched_projects)
+        message = f"{name}"
+
+        return render(request, 'project/search_project.html',{"message":message,"projects": searched_projects})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'project/search_project.html',{"message":message})

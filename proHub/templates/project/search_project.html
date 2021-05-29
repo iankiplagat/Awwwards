@@ -1,0 +1,36 @@
+{%extends 'base.html'%} 
+{% block content %}
+<div class="container">
+
+  <div class="row pt-5 text-center">
+    {% if projects%}
+      <h5><strong><em>{{ projects|length }} project(s) found</em></strong></h5>
+    {% else %}
+      <h2><strong>Found 0 projects</strong></h2>
+    {% endif %}
+
+  </div>
+
+  {% if projects %}
+  <main>
+    <div class="container-fluid pt-5">
+        {% for project in projects %}
+        <div class="portfolio dis">
+          <div class="col-md-8">
+            <div class="card">
+              <img src="{{ project.project_image.url }}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ project.name }}</h5>
+                <p class="card-text">{{ project.description }}</p>
+                <a href="#" class="btn btn-primary">View site</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </main>
+  {% endif %}
+  </div>
+</div>
+{% endblock %}

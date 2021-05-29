@@ -10,21 +10,8 @@ body {
 .navbar {
   padding-top: 0;
   padding-bottom: 0;
-}
-
-#header-top {
-  position: relative;
-  justify-content: space-between;
-  align-items: center;
-  height: 70px;
   border-bottom: 1px solid #e6eaea;
-  width: 100%;
-}
-
-.slogan {
-  font-size: 16px;
-  font-weight: 400;
-  padding-top: 25px;
+  border-top: 1px solid #e6eaea;
 }
 
 .box-center {
@@ -181,6 +168,7 @@ body {
   cursor: pointer;
   margin-left: auto;
   margin-right: auto;
+  padding-left: 30px;
 }
 
 .logo:hover {
@@ -287,10 +275,6 @@ body {
 
 .blue {
   background-color: var(--submit-button);
-}
-
-.navbar {
-  border-bottom: 1px solid #e6eaea;
 }
 
 .dolce {
@@ -484,7 +468,52 @@ button.md-icon {
   flex-direction: row;
 }
 
+.search {
+  margin-left: auto;
+  margin-right: auto;
+  margin-right: 100px;
+  width: 250px;
+}
 
+.search input {
+  background-color: rgb(242, 245, 241);
+  padding: 3px 20px;
+  padding-left: 25px;
+  height: 30px;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.0975);
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.search .fa-search {
+  position: absolute;
+  top: 30.1px;
+  left: 43%;
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+@media only screen and (min-width: 990px) and (max-width: 1400px) {
+  .disp {
+    display: flex;
+    margin-left: 280px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .disp {
+    display: none;
+  }
+  .over-nav {
+    display: none;
+  }
+}
+
+.dis {
+  display: flex;
+  justify-content: center;
+}
 
 
 
