@@ -7,7 +7,7 @@
 
     <title>Create User Profile</title>
     {{form.media}} {% block styles %} {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'css/news.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
     {% endblock %}
   </head>
 
@@ -22,10 +22,10 @@
       >
         {%csrf_token%} {% bootstrap_form form%}
         <input
-          style="background-color: rgb(178, 223, 252)"
+        class="button gry form-group text-center d-grid mt-5 mb-3"
+        style="width: 100%"
           type="submit"
-          class="btn btn-sm"
-          value="Post"
+          value="Create Profile"
         />
       </form>
     </div>

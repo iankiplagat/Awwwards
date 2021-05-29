@@ -10,5 +10,5 @@ class CreateProfileForm(forms.ModelForm):
 class NewSiteForm(forms.ModelForm):
     class Meta:
         model = Projects
-        exclude = ['urls', 'profile', 'user', 'pub_date', 'voters']
+        exclude = ['profile', 'user', 'pub_date', 'voters']
                 

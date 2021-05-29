@@ -10,7 +10,7 @@ class Profile(models.Model):
     profile_pic = CloudinaryField('profile_pic', blank=True)
     name =  models.CharField(max_length =30, blank=True)
     bio = models.CharField(max_length =200, blank=True)
-    location=models.CharField(max_length=50)
+    country = models.CharField(max_length=50)
     email=models.EmailField()
   
     def __str__(self):

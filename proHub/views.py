@@ -6,6 +6,9 @@ from .email import send_welcome_email
 from .models import Profile, Projects
 from .forms import NewSiteForm
 import datetime as dt
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProfileSerializer
 
 # Create your views here.
 def homepage(request):
@@ -77,3 +80,11 @@ def search(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'project/search_project.html',{"message":message})
+
+
+
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        profiles = Profile.objects.all()
+        serializers = ProfileSerializer(profiles, many=True)
+        return Response(serializers.data)

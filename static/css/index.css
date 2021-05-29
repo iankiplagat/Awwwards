@@ -310,7 +310,6 @@ body {
   padding: 0 35px;
   background-color: #49c5b6;
   color: #fff;
-  line-height: 60px;
   text-align: center;
   font-size: 14px;
   font-weight: 500;
@@ -515,5 +514,7 @@ button.md-icon {
   justify-content: center;
 }
 
-
+.magg {
+  margin-left: 20px;
+}
 
