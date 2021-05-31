@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import CreateProfileForm
 from django.http import HttpResponseRedirect,Http404
 from .email import send_welcome_email
-from .models import Profile, Projects
+from .models import Comment, Profile, Projects
 from .forms import NewSiteForm, RatingForm
 import datetime as dt
 from rest_framework.response import Response
@@ -52,7 +52,6 @@ def user_profile(request, username):
     '''
     Method to display a specific user profile
     '''
-    # images = Image.get_image_by_user(username)
     profile = Profile.get_user(username)
     projects = Projects.user_projects(username)
     
@@ -89,11 +88,26 @@ def search(request):
         return render(request, 'project/search_project.html',{"message":message})
 
 def single_site(request,project_id):
+    comments = Comment.objects.all()
     try:
         project = Projects.objects.get(id = project_id)
     except ObjectDoesNotExist:
         raise Http404()
-    return render(request,"project/single_site.html", {"project":project})
+    return render(request,"project/single_site.html", {"project":project, "comments":comments})
+
+@login_required
+def comment(request,project_id):
+    '''
+    Method to add post comments
+    '''
+    project = Projects.objects.get(pk=project_id)
+    comments = request.GET.get("comments")
+    current_user = request.user
+    comment= Comment(project = project, comment = comments, user = current_user)
+    comment.save_comment()
+
+    return redirect('home')
+
 
 
 class ProfileList(APIView):

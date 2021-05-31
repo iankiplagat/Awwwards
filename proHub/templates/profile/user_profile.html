@@ -5,11 +5,13 @@
     <!-- Displaying user profile   -->
     <div class="profile">
       <div class="profile-image">
-        <img
+        <a href="">
+          <img
           class="img-circle profile_img"
           src="{{ profile.profile_pic.url }}"
           alt=""
         />
+        </a>
       </div>
       <div class="details mt-3">
         <h5 class="heading-medium">{{ profile.user.username }}</h5>
@@ -17,9 +19,9 @@
       </div>
       <div class="bio">
         <p>
-          <span class="name"
+          <span
             ><strong>Name:</strong>
-            <em>{{ profile.user.profile.name }}</em></span
+            <em class="name" style="cursor: pointer;">{{ profile.user.profile.name }}</em></span
           >
           <br /><span class="bio-text"
             ><strong>Bio: </strong><em>{{ profile.user.profile.bio }}</em></span
@@ -73,14 +75,14 @@
     <div class="row">
         {% for project in projects %}
         <div class="col-md-4">
-          <div class="card shadow p-3 mb-5 bg-white rounded card quote-card">
-            <div class="card__image border-tlr-radius">
+          <div class="card p-3 mb-5">
+            <div class="card__image">
               <a href="/site/{{project.id}}"
                 ><img
                   src="{{project.project_image.url}}"
                   alt="image"
                   style="width: 100%; height: 250px"
-                  class="border-tlr-radius"
+                  class="image"
               /></a>
             </div>
             <div class="cardbody">

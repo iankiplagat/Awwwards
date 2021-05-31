@@ -117,4 +117,28 @@ class Rating(models.Model):
   
     def delete_rating(self):
         self.delete()
+        
+        
+class Comment(models.Model):
+    comment = models.TextField(max_length=2200)
+    user = models.ForeignKey(User, related_name='commented_by', on_delete=models.CASCADE)
+    project = models.ForeignKey(Projects, related_name='comment_for', on_delete=models.CASCADE)
+    pub_date=models.DateField(auto_now_add=True)
+
+    def __str__(self):  
+        return self.comment
+    
+    def save_comment(self):
+        self.save()
+        
+    def delete_comment(self):
+        self.delete()      
+
+    @classmethod
+    def get_comments(cls,project):
+        return cls.objects.filter(project=project)
+
+    
+    class Meta:
+        ordering=['-pub_date']        
  

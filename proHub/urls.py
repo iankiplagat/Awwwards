@@ -13,6 +13,7 @@ urlpatterns=[
     path('search/', views.search, name='search'),
     path('api/profiles/', views.ProfileList.as_view()),
     re_path(r'^site/(\d+)',views.single_site,name ='single_site'),
+    re_path('comment/(?P<project_id>\d+)',views.comment,name='addComment'),
     path('api/projects/', views.ProjectsList.as_view()),
     re_path(r'api/profile/profile-id/(?P<pk>[0-9]+)/$',
         views.ProfileDescription.as_view()),

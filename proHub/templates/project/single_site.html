@@ -1,8 +1,8 @@
 {% extends 'main/base.html' %} {% load static %} {% block content %}
-<main>
-  <div class="container-fluid justify-content-center">
-    <div class="col-md-8" style="margin-left: auto; margin-right: auto;">
-<div class="card mt-5 p-3 mb-5">
+<div class="container justify-content-center">
+  <main>
+    <div class="col-md-8" style="margin-left: auto; margin-right: auto">
+      <div class="card mt-5 p-3 mb-5">
         <div class="cardbody">
           <div class="author mb-3">
             <img
@@ -13,19 +13,19 @@
             />
 
             <span style="margin-left: 10px"
-                ><a class="puserp" href="/profile/{{project.user.username}}"
-                  >{{project.user}}</a
-                >
-              </span>
+              ><a class="puserp" href="/profile/{{project.user.username}}"
+                >{{project.user}}</a
+              >
+            </span>
           </div>
         </div>
-        <div class="card__image border-tlr-radius">
+        <div class="card__image">
           <a href="#"
             ><img
               src="{{project.project_image.url}}"
               alt="image"
               style="width: 100%"
-              class="border-tlr-radius"
+              class="image"
           /></a>
         </div>
         <div class="cardbody">
@@ -50,33 +50,63 @@
         </div>
       </div>
     </div>
-  </div>
-</main>
+  </main>
 
-<div class="row">
-  <div class="col-md-12" id="Votes">
-    <h3 class="text-center"><strong>Raters</strong></h3><br>
-    {% if ratings %}
-    <div class="vote-titles">
-      <img src="" alt="voter" class="invisible">
-      <!-- <p class="voter-name"></p> -->
-      <p class="vote-title ">Content</p>
-      <p class="vote-title ">Design</p>
-      <p class="vote-title "> Usability</p>
+  <div class="row">
+    <div class="col-md-8" style="margin-left: auto; margin-right: auto;">
+      <div class="comment_header mb-3">
+        <h1 class="text-center">Reviews</h1>
+      </div>
+      <div class="comment card p-5" style="background-color: #fafafa;">
+        {% for comment in comments %} {% if comment.project.id == project.id %}
+        <div class="comments pb-4">
+          <img
+            src="{{comment.user.profile.profile_pic.url}}"
+            class="rounded-circle"
+            alt="user"
+            style="height: 2em; width: 2em"
+          />
+
+          <span style="margin-left: 10px"
+            ><a class="puserp" style="font-weight: 800;" href="/profile/{{project.user.username}}"
+              >{{comment.user}}</a
+            >
+          </span>
+          <span class="comment_details" style="font-size: 0.9rem">{{comment.comment}}</span> <br>
+          <span style="margin-left: 40px;">{{comment.pub_date}}</span>
+        </div>
+        {% else %}
+        <div class="text-center">Be the first to comment!</div>
+        {% endif %} {% endfor %}
+        <div class="comment-section">
+          <form
+            role="add_comment"
+            action="{% url 'addComment' project_id=project.id %}"
+          >
+            {% csrf_token%}
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Write your own review..."
+                name="comments"
+                style="font-size: 1rem; border: 0"
+              />
+              <div class="input-group-btn">
+                <button
+                  class="btn name"
+                  type="submit"
+                  style="font-size: 1rem"
+                >
+                  Post
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      
     </div>
-    {% for vote in ratings%}
-    <img src="{{vote.rater.profile_pic.url}}" alt="voter" style="height: 4em;width: 4em;" class="rounded-circle">
-    <div class="vote-details">
-      <p class="voter-name">{{vote.rater.user.username}}</p>
-      <p class="content-vote">{{vote.content | floatformat:0}}</p>
-      <p class="design-vote">{{vote.design | floatformat:0}}</p>
-      <p class="usability-vote">{{vote.usability | floatformat:0}}</p>
-    </div>
-    {% endfor %}
-    {% else %}
-    <div class="text-center have-already">No votes yet</div>
-    {% endif %}
   </div>
-</div>
 </div>
 {% endblock %}
