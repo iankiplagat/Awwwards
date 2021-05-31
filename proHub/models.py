@@ -92,19 +92,13 @@ class Rating(models.Model):
   )
   
     user = models.ForeignKey(User, related_name='ratings', on_delete=models.CASCADE, null=True)
-    reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    projects = models.ForeignKey(Projects, related_name='ratings', on_delete=models.CASCADE, null=True)
+    project = models.ForeignKey(Projects, related_name='ratings', on_delete=models.CASCADE, null=True)
     post_date = models.DateTimeField(auto_now_add=True, null=True)
     usability = models.FloatField(default=0.00, null=True, choices=RATINGS)
     design = models.FloatField(default=0.00, null=True, choices=RATINGS)
     creativity = models.FloatField(default=0.00, null=True, choices=RATINGS)
     content = models.FloatField(default=0.00, null=True, choices=RATINGS)
     mobile = models.FloatField(default=0.00, null=True, choices=RATINGS)
-    usability_average=models.FloatField(default=0.00, null=True)
-    design_average=models.FloatField(default=0.00, null=True)  
-    creativity_average=models.FloatField(default=0.00, null=True)  
-    content_average=models.FloatField(default=0.00, null=True)  
-    mobile_average=models.FloatField(default=0.00, null=True) 
     
     def __str__(self):
         return self.projects

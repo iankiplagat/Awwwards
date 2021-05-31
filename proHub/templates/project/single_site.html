@@ -1,4 +1,4 @@
-{% extends 'main/base.html' %} {% load static %} {% block content %}
+{% extends 'main/base.html' %} {% load bootstrap5 %} {% load static %} {% block content %}
 <div class="container justify-content-center">
   <main>
     <div class="col-md-8" style="margin-left: auto; margin-right: auto">
@@ -108,5 +108,64 @@
       
     </div>
   </div>
+  {% if not logic %}
+  <div class="row pt-5">
+    <div class="col-8" style="margin-left: auto; margin-right: auto;">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="pb-3 text-center">Give Rating</h5>
+          <form action="" method="POST">
+            {% csrf_token %}
+            {% bootstrap_form form%}
+            <input
+              class="button gry form-group text-center d-grid mt-5 mb-3"
+              style="width: 100%"
+              type="submit"
+              value="RATE"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  
+  <div class="row mt-5">
+    <div class="col-md-8" style="margin-left: auto; margin-right: auto;">
+      <div class="comment_header mb-3">
+        <h1 class="text-center">Ratings</h1>
+      </div>
+      <div class="card pt-3 pb-2 text-center">
+        <p>usability average rating = {{usability_rating|floatformat}}</p>
+        <p>design average rating = {{design_rating|floatformat}}</p>
+        <p>creativity average rating = {{creativity_rating|floatformat}}</p>
+        <p>content average rating = {{content_rating|floatformat}}</p>
+        <p>mobile average rating = {{mobile_rating|floatformat}}</p>
+      </div>
+      <div class="pt-5">
+        <table class="table">
+          <tbody>
+            {% for rating in ratings %}
+            <tr>
+              <th scope="row">
+                <img class="rounded-circle" style="width: 2em; height: 2em" src="{{rating.user.profile.profile_pic.url}}" alt="">
+              </th>
+              <td>{{rating.user.username}}</td>
+              <td>{{rating.usability}}</td>
+              <td>{{rating.design}}</td>
+              <td>{{rating.creativity}}</td>
+              <td>{{rating.content}}</td>
+              <td>{{rating.mobile}}</td>
+              <td>{{rating.avg_rating|floatformat}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 </div>
 {% endblock %}

@@ -5,9 +5,10 @@ from django.contrib.auth.decorators import login_required
 from .forms import CreateProfileForm
 from django.http import HttpResponseRedirect,Http404
 from .email import send_welcome_email
-from .models import Comment, Profile, Projects
+from .models import Comment, Profile, Projects, Rating
 from .forms import NewSiteForm, RatingForm, UpdateProfile
 import datetime as dt
+from django.db.models import F
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProfileSerializer, ProjectsSerializer
@@ -88,13 +89,62 @@ def search(request):
         message = "You haven't searched for any term"
         return render(request, 'project/search_project.html',{"message":message})
 
+@login_required
 def single_site(request,project_id):
+    current_user = request.user
     comments = Comment.objects.all()
-    try:
-        project = Projects.objects.get(id = project_id)
-    except ObjectDoesNotExist:
-        raise Http404()
-    return render(request,"project/single_site.html", {"project":project, "comments":comments})
+    project = Projects.objects.get(id = project_id)
+    ratings = Rating.objects.filter(project__id__contains=project_id).annotate(avg_rating=(F('usability') +F('design') +F('creativity')  +F('content') +F('mobile'))/5).order_by('-avg_rating')
+    logic = ratings.filter(user__username__icontains=current_user.username)
+    usability_list = []
+    usability_rating = 0
+    design_list = []
+    design_rating = 0
+    creativity_list = []
+    creativity_rating = 0
+    content_list = []
+    content_rating = 0
+    mobile_list = []
+    mobile_rating = 0
+    
+    for rating in ratings: 
+        usability_list.append(rating.usability)
+        usability_rating = sum(usability_list)/len(usability_list)
+        design_list.append(rating.design)
+        design_rating = sum(design_list)/len(design_list)
+        content_list.append(rating.content)
+        content_rating = sum(content_list)/len(content_list)
+        creativity_list.append(rating.creativity)
+        creativity_rating = sum(creativity_list)/len(creativity_list)
+        mobile_list.append(rating.mobile)
+        mobile_rating = sum(mobile_list)/len(mobile_list)
+    
+    if request.method == 'POST':
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.user = current_user
+            rating.project = project
+            rating.save()
+        return redirect('single_site', project_id)
+
+    else:
+        form = RatingForm()
+        context = {
+            'comments':comments,
+            'project':project, 
+            'form':form,
+            'ratings':ratings, 
+            'usability_rating' : usability_rating,
+            'design_rating' : design_rating, 
+            'creativity_rating' : creativity_rating, 
+            'content_rating' : content_rating, 
+            'mobile_rating' : mobile_rating,
+            'logic':logic
+
+            }
+    
+    return render(request,"project/single_site.html", context)
 
 @login_required
 def comment(request,project_id):
