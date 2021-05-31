@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile, Projects
+from .models import Profile, Projects, Rating
 
 class CreateProfileForm(forms.ModelForm):  
     class Meta:
@@ -11,4 +11,10 @@ class NewSiteForm(forms.ModelForm):
     class Meta:
         model = Projects
         exclude = ['profile', 'user', 'pub_date', 'voters']
+        
+        
+class RatingForm(forms.ModelForm):
+  class Meta:
+    model = Rating
+    fields = ['usability', 'design', 'creativity', 'content', 'mobile']        
                 

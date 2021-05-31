@@ -1,0 +1,82 @@
+{% extends 'main/base.html' %} {% load static %} {% block content %}
+<main>
+  <div class="container-fluid justify-content-center">
+    <div class="col-md-8" style="margin-left: auto; margin-right: auto;">
+<div class="card mt-5 p-3 mb-5">
+        <div class="cardbody">
+          <div class="author mb-3">
+            <img
+              src="{{project.user.profile.profile_pic.url}}"
+              class="rounded-circle"
+              alt="user"
+              style="height: 2em; width: 2em"
+            />
+
+            <span style="margin-left: 10px"
+                ><a class="puserp" href="/profile/{{project.user.username}}"
+                  >{{project.user}}</a
+                >
+              </span>
+          </div>
+        </div>
+        <div class="card__image border-tlr-radius">
+          <a href="#"
+            ><img
+              src="{{project.project_image.url}}"
+              alt="image"
+              style="width: 100%"
+              class="border-tlr-radius"
+          /></a>
+        </div>
+        <div class="cardbody">
+          <div class="card__share">
+            <a
+              id="share"
+              class="share-icon"
+              href="{{project.url}}"
+              target="_blank"
+              ><i class="fas fa-share"></i
+            ></a>
+          </div>
+          <div class="card__meta">
+            <a href="#"></a>
+
+            <time>{{project.pub_date}}</time>
+          </div>
+          <article class="card__article">
+            <h3><a href="#">{{project.name}}</a></h3>
+            <p>{{project.description}}</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="row">
+  <div class="col-md-12" id="Votes">
+    <h3 class="text-center"><strong>Raters</strong></h3><br>
+    {% if ratings %}
+    <div class="vote-titles">
+      <img src="" alt="voter" class="invisible">
+      <!-- <p class="voter-name"></p> -->
+      <p class="vote-title ">Content</p>
+      <p class="vote-title ">Design</p>
+      <p class="vote-title "> Usability</p>
+    </div>
+    {% for vote in ratings%}
+    <img src="{{vote.rater.profile_pic.url}}" alt="voter" style="height: 4em;width: 4em;" class="rounded-circle">
+    <div class="vote-details">
+      <p class="voter-name">{{vote.rater.user.username}}</p>
+      <p class="content-vote">{{vote.content | floatformat:0}}</p>
+      <p class="design-vote">{{vote.design | floatformat:0}}</p>
+      <p class="usability-vote">{{vote.usability | floatformat:0}}</p>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="text-center have-already">No votes yet</div>
+    {% endif %}
+  </div>
+</div>
+</div>
+{% endblock %}

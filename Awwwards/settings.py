@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'proHub.apps.ProhubConfig',
     'bootstrap5',
     'cloudinary',
+    'cloudinary_storage',
     'rest_framework',
     'rest_framework.authtoken',
     'django.contrib.admin',
@@ -53,11 +54,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-cloudinary.config(
-    cloud_name="kasparov",
-    api_key="623993469388411",
-    api_secret="VCf65PVv1BM09CJbTXCjj2pprRc",
-)
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME':"kasparov",
+    'API_KEY':"623993469388411",
+    'API_SECRET':"VCf65PVv1BM09CJbTXCjj2pprRc",
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -152,8 +153,9 @@ STATICFILES_DIRS = [
 ]
 
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/Awwards/'
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

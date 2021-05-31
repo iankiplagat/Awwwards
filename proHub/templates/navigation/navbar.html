@@ -8,24 +8,23 @@
   ></a>
   {% if user.is_authenticated %}
   <a href="/profile/{{ user.username }}">Profile</a>
-  <a href="">Explore</a>
   {% endif %}
   <a href="/accounts/login">Register/Login</a>
   <a href="{% url 'home' %}">Home</a>
-  <a href="{%url 'new_site'%}">Submit Your Site!</a>
-  <a href="#">About</a>
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
+  <a href="{% url 'new_site' %}">Submit Your Site!</a>
+  <a href="{% url 'about' %}">About Us</a>
   {% if user.is_authenticated %}
-  <a href="/logout">Logout</a>
+  <a class="text-muted" href="/logout"
+    >Logout
+    <span style="margin-left: 110px"><i class="fas fa-sign-out-alt"></i></span
+  ></a>
   {% endif %}
 </div>
 
 <div>
   <!-- Navigation bar -->
   <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid" style="padding: 0;">
+    <div class="container-fluid" style="padding: 0">
       <div class="" id="header">
         <span class="menu" onclick="openNav()">&#9776; MENU</span>
       </div>
@@ -80,20 +79,16 @@
       </a>
       {% if user.is_authenticated %}
       <div class="disp">
-        <form
-        class="search d-flex"
-        role="search"
-        action="{% url 'search' %}"
-      >
-        <!-- <i class="fa fa-search"></i> -->
-        <input
-          class="text-center form-control me-2"
-          type="search"
-          name="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-      </form>
+        <form class="search d-flex" role="search" action="{% url 'search' %}">
+          <!-- <i class="fa fa-search"></i> -->
+          <input
+            class="text-center form-control me-2"
+            type="search"
+            name="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+        </form>
       </div>
       <div class="prof collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -107,7 +102,6 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              {% if profile.profile_pic %}
               <img
                 class="img-circle"
                 src="{{ profile.profile_pic.url }}"
@@ -115,15 +109,6 @@
                 width="40px"
                 height="40px"
               />
-              {% else %}
-              <img
-                src="https://assets.awwwards.com/awards/media/cache/thumb_user_retina/default/user5.jpg"
-                alt=""
-                class="img-circle"
-                width="40px"
-                height="40px"
-              />
-              {% endif %}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
@@ -153,7 +138,12 @@
         <a class="carta nav-item reg" href="/accounts/register/">REGISTER</a>
       </div>
       <div class="site">
-        <a class="carta nav-item reg" style="background-color: #49C5B6;" href="{% url 'new_site' %}">SUBMIT YOUR SITE!</a>
+        <a
+          class="carta nav-item reg"
+          style="background-color: #49c5b6"
+          href="{% url 'new_site' %}"
+          >SUBMIT YOUR SITE!</a
+        >
       </div>
       {% endif %}
     </div>

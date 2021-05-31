@@ -6,7 +6,6 @@ body {
   box-sizing: border-box;
 }
 
-
 .navbar {
   padding-top: 0;
   padding-bottom: 0;
@@ -101,12 +100,8 @@ body {
 .socials a {
   cursor: pointer;
   color: black;
-  font-size: 20px;
-  display: inline-block;
-  text-align: center;
   text-decoration: none;
-  margin-right: 10px;
-  line-height: 50px;
+  font-size: 15px;
 }
 
 .socials a:hover {
@@ -196,6 +191,16 @@ body {
 .cont {
   padding-left: 0;
   padding-right: 0;
+}
+
+.puserp {
+  text-decoration: none;
+  color: black;
+}
+
+.puserp:hover {
+  text-decoration: underline;
+  color: black;
 }
 
 .profile {
@@ -396,16 +401,31 @@ a:hover {
   width: 100%;
 }
 
-
 .site-title {
-  font-family: 'Limelight', cursive;
+  font-family: "Limelight", cursive;
+  text-decoration: none !important;
 }
 
 .circle {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border: 3px solid;
   border-radius: 50%;
+}
+
+.wrld {
+  font-size: 13px;
+  color: white;
+}
+
+.name {
+  color: #49c5b6;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.name:hover {
+  color: black;
 }
 
 .border-red {
@@ -425,7 +445,7 @@ button.md-icon {
 }
 
 .card-bg {
-  background-color: rgba(7, 7, 7, 0.4)
+  background-color: rgba(7, 7, 7, 0.4);
 }
 
 .site-img {
@@ -433,7 +453,6 @@ button.md-icon {
   overflow: hidden;
   position: relative;
 }
-
 
 .site-fade-out {
   position: absolute;
@@ -509,6 +528,12 @@ button.md-icon {
   }
 }
 
+@media screen and (max-width: 485px) {
+  .ratings {
+    display: none;
+  }
+}
+
 .dis {
   display: flex;
   justify-content: center;
@@ -517,4 +542,34 @@ button.md-icon {
 .magg {
   margin-left: 20px;
 }
+
+.page-headings.style2 {
+  width: 820px;
+  max-width: 100%;
+  padding: 50px 0;
+}
+.page-headings {
+  position: relative;
+  font-size: 16px;
+  padding-left: 35px;
+}
+
+.page-headings hr {
+  display: block;
+  width: 80px;
+  height: 4px;
+  margin-top: 100px;
+  margin-bottom: 30px;
+  color: black;
+  background-color: black;
+  border: none;
+}
+
+.heading-x-large {
+  font-size: 48px;
+  font-weight: 800;
+}
+
+
+
 

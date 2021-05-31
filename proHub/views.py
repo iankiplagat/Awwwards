@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from .forms import CreateProfileForm
 from django.http import HttpResponseRedirect,Http404
 from .email import send_welcome_email
 from .models import Profile, Projects
-from .forms import NewSiteForm
+from .forms import NewSiteForm, RatingForm
 import datetime as dt
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -15,9 +16,13 @@ from .permissions import IsAdminOrReadOnly
 # Create your views here.
 def homepage(request):
   date=dt.date.today()
-  projects=Projects.get_all_projects()
+  projects = Projects.objects.all()
   
-  return render(request, 'home.html', {"date":date, "projects":projects})
+  return render(request, 'main/home.html', {"date":date, "projects":projects})
+
+def about(request):
+  
+  return render(request, 'main/about.html')
 
 @login_required
 def welcome_mail(request):
@@ -83,6 +88,12 @@ def search(request):
         message = "You haven't searched for any term"
         return render(request, 'project/search_project.html',{"message":message})
 
+def single_site(request,project_id):
+    try:
+        project = Projects.objects.get(id = project_id)
+    except ObjectDoesNotExist:
+        raise Http404()
+    return render(request,"project/single_site.html", {"project":project})
 
 
 class ProfileList(APIView):

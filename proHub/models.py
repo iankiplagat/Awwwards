@@ -7,7 +7,7 @@ import datetime as dt
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_pic = CloudinaryField('profile_pic', blank=True)
+    profile_pic = models.ImageField(upload_to='profile_photos/', default='profile_photos/default_qbeyia')
     name =  models.CharField(max_length =30, blank=True)
     bio = models.CharField(max_length =200, blank=True)
     country = models.CharField(max_length=50)
@@ -35,8 +35,8 @@ class Profile(models.Model):
 class Projects(models.Model):
   name = models.CharField(max_length=50)
   description = models.TextField()
-  project_image = CloudinaryField('project_images')
-  urls = models.URLField()
+  project_image = models.ImageField(upload_to='project_photos/')
+  url = models.URLField()
   pub_date = models.DateTimeField(auto_now_add=True)
   profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
   user = models.ForeignKey(User, related_name="posted_by", on_delete=models.CASCADE, null=True)
@@ -77,15 +77,29 @@ class Meta:
   
   
 class Rating(models.Model):
+    RATINGS = (
+    (0, '0'),
+    (1, '1'),
+    (2, '2'),
+    (3, '3'),
+    (4, '4'),
+    (5, '5'),
+    (6, '6'),
+    (7, '7'),
+    (8, '8'),
+    (9, '9'),
+    (10, '10'),
+  )
+  
     user = models.ForeignKey(User, related_name='ratings', on_delete=models.CASCADE, null=True)
     reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE)
     projects = models.ForeignKey(Projects, related_name='ratings', on_delete=models.CASCADE, null=True)
     post_date = models.DateTimeField(auto_now_add=True, null=True)
-    usability = models.FloatField(default=0.00, null=True)
-    design = models.FloatField(default=0.00, null=True)
-    creativity = models.FloatField(default=0.00, null=True)
-    content = models.FloatField(default=0.00, null=True)
-    mobile = models.FloatField(default=0.00, null=True)
+    usability = models.FloatField(default=0.00, null=True, choices=RATINGS)
+    design = models.FloatField(default=0.00, null=True, choices=RATINGS)
+    creativity = models.FloatField(default=0.00, null=True, choices=RATINGS)
+    content = models.FloatField(default=0.00, null=True, choices=RATINGS)
+    mobile = models.FloatField(default=0.00, null=True, choices=RATINGS)
     usability_average=models.FloatField(default=0.00, null=True)
     design_average=models.FloatField(default=0.00, null=True)  
     creativity_average=models.FloatField(default=0.00, null=True)  
