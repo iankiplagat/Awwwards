@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
@@ -5,7 +6,7 @@ from .forms import CreateProfileForm
 from django.http import HttpResponseRedirect,Http404
 from .email import send_welcome_email
 from .models import Comment, Profile, Projects
-from .forms import NewSiteForm, RatingForm
+from .forms import NewSiteForm, RatingForm, UpdateProfile
 import datetime as dt
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -106,7 +107,25 @@ def comment(request,project_id):
     comment= Comment(project = project, comment = comments, user = current_user)
     comment.save_comment()
 
-    return redirect('home')
+    return redirect('single_site', project.pk)
+
+@login_required
+def update_profile(request,username):
+  user=User.objects.get(username=username)
+  current_user = request.user
+  
+  if request.method =='POST':
+    form = UpdateProfile(request.POST,request.FILES, instance=current_user.profile)
+    
+    if form.is_valid():
+      form.save()
+      return redirect('profile', user.username)
+  
+  else:
+    form = UpdateProfile(instance=current_user.profile)
+  
+  return render(request,"profile/update_profile.html", {"form":form})
+
 
 
 

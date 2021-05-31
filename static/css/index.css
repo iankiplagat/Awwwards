@@ -28,6 +28,16 @@ body {
   text-decoration: underline;
 }
 
+.profile-name {
+  color: black;
+  text-decoration: none;
+}
+
+.profile-name:hover {
+  color: black;
+  text-decoration: none;
+}
+
 .navbar {
   padding-top: 0;
   padding-bottom: 0;

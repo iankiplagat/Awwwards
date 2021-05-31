@@ -16,5 +16,11 @@ class NewSiteForm(forms.ModelForm):
 class RatingForm(forms.ModelForm):
   class Meta:
     model = Rating
-    fields = ['usability', 'design', 'creativity', 'content', 'mobile']        
+    fields = ['usability', 'design', 'creativity', 'content', 'mobile']    
+    
+    
+class UpdateProfile(forms.ModelForm):
+  class Meta:
+    model = Profile
+    fields = ['profile_pic', 'name', 'bio', 'country', 'email']        
                 

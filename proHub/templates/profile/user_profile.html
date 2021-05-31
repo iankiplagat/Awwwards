@@ -14,7 +14,8 @@
         </a>
       </div>
       <div class="details mt-3">
-        <h5 class="heading-medium">{{ profile.user.username }}</h5>
+        <a class="profile-name" href="/update_profile/{{ user.username }}"><h5 class="heading-medium">{{ profile.user.username }}</h5></a>
+        <span style="padding-left: 10px;"><a class="name" href="/update_profile/{{ user.username }}"><i class="fas fa-pen"></i></a></span>
         <br />
       </div>
       <div class="bio">
@@ -23,49 +24,18 @@
             ><strong>Name:</strong>
             <em class="name" style="cursor: pointer;">{{ profile.user.profile.name }}</em></span
           >
+          <br /><span
+            ><strong>Email: </strong><em>{{ profile.user.profile.email }}</em></span>
           <br /><span class="bio-text"
             ><strong>Bio: </strong><em>{{ profile.user.profile.bio }}</em></span
+          > <br>
+          <span
+            ><strong>Country: </strong><em>{{ profile.user.profile.country }}</em></span
           >
         </p>
       </div>
-      <div class="profile-user-settings">
-        <!-- Modal -->
-        <div
-          class="modal fade"
-          id="proHubModal"
-          tabindex="-1"
-          aria-labelledby="proHubModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-body">
-                <div class="">
-                  <div class="magna bbtm">
-                    <a class="carta pb-3" href="/profile/{{ user.username }}"
-                      >Profile</a
-                    >
-                  </div>
-                  <div class="magna bbtm">
-                    <a class="carta" href="/accounts/password/change"
-                      >Change Password</a
-                    >
-                  </div>
-                  <div class="magna">
-                    <a class="carta" href="/logout">Logout</a>
-                  </div>
-                </div>
-              </div>
-              <div class="magna margm">
-                <a class="logout carta" href="">Cancel</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     <!-- End of profile section -->
-    <!-- Portfolio section -->
   </div>
   {% endfor %}
   <!-- End of container -->

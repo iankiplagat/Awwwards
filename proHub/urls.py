@@ -11,6 +11,7 @@ urlpatterns=[
     path('profile/<username>',views.user_profile,name='profile'),
     path('new/site', views.new_site, name='new_site'),
     path('search/', views.search, name='search'),
+    path('update_profile/<username>',views.update_profile,name='update_profile'),
     path('api/profiles/', views.ProfileList.as_view()),
     re_path(r'^site/(\d+)',views.single_site,name ='single_site'),
     re_path('comment/(?P<project_id>\d+)',views.comment,name='addComment'),
