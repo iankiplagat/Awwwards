@@ -12,7 +12,7 @@ import datetime as dt
 from django.db.models import F
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializer import ProfileSerializer, ProjectsSerializer
+from .serializer import ProfileSerializer, ProjectsSerializer, CommentSerializer
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
 from django.http import JsonResponse
