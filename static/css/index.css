@@ -454,17 +454,22 @@ a:hover {
 .bts .bt-connect {
   margin-right: 20px;
 }
+
 .landing {
-  height: 550px;
+  height: 500px;
   width: 100%;
   position: relative;
   overflow: hidden;
-  background-color: gray;
 }
 
 .landing-img {
   width: 100%;
 }
+
+.rgba-overlay {
+  background: rgba(5, 5, 5, 0.8) 
+}
+
 
 #landing-overlay {
   position: absolute;
@@ -510,10 +515,6 @@ a:hover {
 
 .dec {
   font-size: 16px;
-}
-
-button.md-icon {
-  overflow: hidden;
 }
 
 .card-bg {

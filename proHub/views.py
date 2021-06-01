@@ -17,6 +17,8 @@ from rest_framework import status
 from .permissions import IsAdminOrReadOnly
 from django.http import JsonResponse
 
+
+# Custom 404 page
 def handle_not_found(request, exception):
     
     return render(request, 'errors/404.html')
@@ -25,9 +27,9 @@ def handle_not_found(request, exception):
 def homepage(request):
   date=dt.date.today()
   projects = Projects.objects.all()
-  ratings = Rating.objects.all().annotate(avg_rating=(F('design')+ F('usability') +F('content'))/3).order_by('-avg_rating')[0]
+  highest_rated_site = Rating.objects.order_by().annotate(avg_rating=(F('design')+ F('usability') +F('content'))/3).order_by('-avg_rating')[0]
   
-  return render(request, 'main/home.html', {"date":date, "projects":projects, "ratings":ratings})
+  return render(request, 'main/home.html', {"date":date, "projects":projects, "highest_rated_site":highest_rated_site})
 
 def about(request):
   
