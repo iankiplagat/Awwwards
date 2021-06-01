@@ -12,8 +12,4 @@ class ProjectsSerializer(serializers.ModelSerializer):
         model = Projects
         fields = ('id', 'name', 'description', 'project_image', 'urls', 'pub_date', 'profile', 'user')   
         
-        
-class CommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Comment
-        fields = ('id', 'user', 'comment', 'project', 'pub_date')             
+                   

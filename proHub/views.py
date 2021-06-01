@@ -12,7 +12,7 @@ import datetime as dt
 from django.db.models import F
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializer import ProfileSerializer, ProjectsSerializer, CommentSerializer
+from .serializer import ProfileSerializer, ProjectsSerializer
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
 from django.http import JsonResponse
@@ -231,3 +231,17 @@ class ProjectsList(APIView):
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST) 
     
+    
+    
+class ProjectDescription(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
+    def get_project(self, pk):
+        try:
+            return Projects.objects.get(pk=pk)
+        except Projects.DoesNotExist:
+            return Http404
+
+    def get(self, request, pk, format=None):
+        project = self.get_project(pk)
+        serializers = ProjectsSerializer(project)
+        return Response(serializers.data)        
