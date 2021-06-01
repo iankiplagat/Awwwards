@@ -26,14 +26,18 @@ def handle_not_found(request, exception):
 # Create your views here.
 def homepage(request):
   date=dt.date.today()
-  projects = Projects.objects.all()
+  username = request.user.username
+  profile = Profile.get_user(username)
+  projects = Projects.objects.all().order_by('-pub_date')
   highest_rated_site = Rating.objects.order_by().annotate(avg_rating=(F('design')+ F('usability') +F('content'))/3).order_by('-avg_rating')[0]
   
-  return render(request, 'main/home.html', {"date":date, "projects":projects, "highest_rated_site":highest_rated_site})
+  return render(request, 'main/home.html', {"date":date, "projects":projects, "highest_rated_site":highest_rated_site, "profile": profile})
 
 def about(request):
+    username = request.user.username
+    profile = Profile.get_user(username)
   
-  return render(request, 'main/about.html')
+    return render(request, 'main/about.html', {"username":username, "profile":profile})
 
 @login_required
 def welcome_mail(request):
@@ -85,24 +89,29 @@ def new_site(request):
 
 @login_required  
 def search(request):
+    username = request.user.username
+    profile = Profile.get_user(username)
 
     if 'search' in request.GET and request.GET["search"]:
         name = request.GET.get("search")
-        searched_projects = Projects.search_project(name)
+        searched_projects = Projects.search_project(name).order_by('-pub_date')
         print(searched_projects)
         message = f"{name}"
 
-        return render(request, 'project/search_project.html',{"message":message,"projects": searched_projects})
+        return render(request, 'project/search_project.html',{"message":message,"projects": searched_projects, "username":username, "profile":profile})
 
     else:
         message = "You haven't searched for any term"
+        
         return render(request, 'project/search_project.html',{"message":message})
 
 @login_required
 def single_site(request,project_id):
     current_user = request.user
-    comments = Comment.objects.all()
+    username = request.user.username
+    profile = Profile.get_user(username)
     project = Projects.objects.get(id = project_id)
+    comments = Comment.objects.filter(project__id__contains = project_id).order_by('-pub_date')
     ratings = Rating.objects.filter(project__id__contains=project_id).annotate(avg_rating=(F('usability') +F('design') +F('creativity')  +F('content') +F('mobile'))/5).order_by('-avg_rating')
     logic = ratings.filter(user__username__icontains=current_user.username)
     usability_list = []
@@ -142,6 +151,8 @@ def single_site(request,project_id):
         context = {
             'comments':comments,
             'project':project, 
+            'username':username, 
+            'profile':profile, 
             'form':form,
             'ratings':ratings, 
             'usability_rating' : usability_rating,

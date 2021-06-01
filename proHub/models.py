@@ -40,7 +40,6 @@ class Projects(models.Model):
   pub_date = models.DateTimeField(auto_now_add=True)
   profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
   user = models.ForeignKey(User, related_name="posted_by", on_delete=models.CASCADE, null=True)
-  voters = models.IntegerField(default=0)
 
 
   def __str__(self):

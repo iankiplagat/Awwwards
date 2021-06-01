@@ -40,7 +40,7 @@ class ProjectsImageClass(TestCase):
         self.user.save()
         self.profile= Profile(user = self.user, profile_pic = 'img', name = 'img', bio = 'I am Levlest', country = 'Kenya', email = 'test@gmail.com')
         self.profile.save()
-        self.project = Projects(name = 'name', description = 'description', project_image = 'img', url = 'url', pub_date = 'date', user = self.user, profile = self.profile, voters = 0)
+        self.project = Projects(name = 'name', description = 'description', project_image = 'img', url = 'url', pub_date = 'date', user = self.user, profile = self.profile)
         
     # Testing instance
     def test_instance(self):
@@ -73,7 +73,7 @@ class CommentTestClass(TestCase):
         self.user.save()
         self.profile= Profile(user = self.user, profile_pic = 'img', name = 'img', bio = 'I am Levlest', country = 'Kenya', email = 'test@gmail.com')
         self.profile.save()
-        self.project = Projects(name = 'name', description = 'description', project_image = 'img', url = 'url', pub_date = 'date', user = self.user, profile = self.profile, voters = 0)
+        self.project = Projects(name = 'name', description = 'description', project_image = 'img', url = 'url', pub_date = 'date', user = self.user, profile = self.profile)
         self.project.save()
         self.comment = Comment(comment = 'This is lovely', user = self.user, project = self.project)
         
@@ -109,7 +109,7 @@ class RatingTestClass(TestCase):
         self.user.save()
         self.profile= Profile(user = self.user, profile_pic = 'img', name = 'img', bio = 'I am Levlest', country = 'Kenya', email = 'test@gmail.com')
         self.profile.save()
-        self.project = Projects(name = 'name', description = 'description', project_image = 'img', url = 'url', pub_date = 'date', user = self.user, profile = self.profile, voters = 0)
+        self.project = Projects(name = 'name', description = 'description', project_image = 'img', url = 'url', pub_date = 'date', user = self.user, profile = self.profile)
         self.project.save()
         self.rating = Rating(user = self.user, project = self.project, post_date = 'date', usability = 0, design = 0, creativity = 0, content = 0, mobile = 0)
         
