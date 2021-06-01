@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import handler404
+from proHub.views import handle_not_found
 from django.contrib import admin
 from django.urls import path, include
 from django_registration.backends.one_step.views import RegistrationView
@@ -30,3 +32,5 @@ urlpatterns = [
     path('accounts/', include('django_registration.backends.one_step.urls')),
     path('api-token-auth/', obtain_auth_token)
 ]
+
+handler404 = 'proHub.views.handle_not_found'

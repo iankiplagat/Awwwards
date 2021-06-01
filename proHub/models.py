@@ -101,7 +101,7 @@ class Rating(models.Model):
     mobile = models.FloatField(default=0.00, null=True, choices=RATINGS)
     
     def __str__(self):
-        return self.projects
+        return self.project.name
       
     class Meta:
         ordering=['-post_date']  

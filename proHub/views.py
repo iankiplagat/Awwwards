@@ -1,9 +1,10 @@
 from django.contrib.auth.models import User
+from django.core import exceptions
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from .forms import CreateProfileForm
-from django.http import HttpResponseRedirect,Http404
+from django.http import HttpResponseRedirect,Http404, request
 from .email import send_welcome_email
 from .models import Comment, Profile, Projects, Rating
 from .forms import NewSiteForm, RatingForm, UpdateProfile
@@ -14,13 +15,19 @@ from rest_framework.views import APIView
 from .serializer import ProfileSerializer, ProjectsSerializer
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
+from django.http import JsonResponse
+
+def handle_not_found(request, exception):
+    
+    return render(request, 'errors/404.html')
 
 # Create your views here.
 def homepage(request):
   date=dt.date.today()
   projects = Projects.objects.all()
+  ratings = Rating.objects.all().annotate(avg_rating=(F('design')+ F('usability') +F('content'))/3).order_by('-avg_rating')[0]
   
-  return render(request, 'main/home.html', {"date":date, "projects":projects})
+  return render(request, 'main/home.html', {"date":date, "projects":projects, "ratings":ratings})
 
 def about(request):
   

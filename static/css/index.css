@@ -28,6 +28,10 @@ body {
   text-decoration: underline;
 }
 
+.hov:hover {
+  color: #49c5b6;
+}
+
 .profile-name {
   color: black;
   text-decoration: none;
